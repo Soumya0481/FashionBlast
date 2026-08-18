@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders - FashionBlast</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+
+<section class="orders-page">
+
+    <h1>📦 My Orders</h1>
+
+
+    <% if(orders.length === 0){ %>
+
+        <div class="empty-orders">
+
+            <h2>No Orders Yet</h2>
+
+            <p>
+                You haven't placed any orders yet.
+            </p>
+
+            <a href="/products">
+                <button>Start Shopping</button>
+            </a>
+
+        </div>
+
+
+    <% } else { %>
+
+
+        <div class="orders-container">
+
+            <% orders.forEach(order => { %>
+
+                <div class="order-card">
+
+                    <img
+                        src="<%= order.product.image %>"
+                        alt="<%= order.product.name %>"
+                    >
+
+                    <div class="order-details">
+
+                        <p class="product-brand">
+                            <%= order.product.brand %>
+                        </p>
+
+                        <h2>
+                            <%= order.product.name %>
+                        </h2>
+
+                        <p>
+                            Quantity:
+                            <strong><%= order.quantity %></strong>
+                        </p>
+
+                        <p>
+                            Total:
+                            <strong>₹<%= order.totalPrice %></strong>
+                        </p>
+
+                        <p>
+                            Status:
+                            <strong><%= order.status %></strong>
+                        </p>
+
+                        <p>
+                            Ordered on:
+                            <%= new Date(order.createdAt).toLocaleDateString() %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+
+    <% } %>
+
+</section>
+
+
+</body>
+
+</html>

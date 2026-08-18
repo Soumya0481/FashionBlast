@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Wishlist - FashionBlast</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+
+<section class="products">
+
+    <h1 class="page-title">❤️ My Wishlist</h1>
+
+
+    <% if(wishlistItems.length === 0){ %>
+
+        <div class="empty-wishlist">
+
+            <h2>Your Wishlist is Empty</h2>
+
+            <p>Save products you love and find them here.</p>
+
+            <a href="/products">
+                <button>Explore Products</button>
+            </a>
+
+        </div>
+
+
+    <% } else { %>
+
+
+        <div class="product-container">
+
+
+            <% wishlistItems.forEach(item => { %>
+
+                <div class="product-card">
+
+
+                    <a
+                        href="/product/<%= item.product._id %>"
+                        style="text-decoration:none; color:black;"
+                    >
+
+                        <img
+                            src="<%= item.product.image %>"
+                            alt="<%= item.product.name %>"
+                        >
+
+                        <p class="product-brand">
+                            <%= item.product.brand %>
+                        </p>
+
+                        <h3>
+                            <%= item.product.name %>
+                        </h3>
+
+                    </a>
+
+
+                    <div class="rating">
+
+                        ⭐ <%= item.product.rating %>
+
+                        <span>
+                            (<%= item.product.reviews %>)
+                        </span>
+
+                    </div>
+
+
+                    <div class="price">
+
+                        <span class="current-price">
+                            ₹<%= item.product.price %>
+                        </span>
+
+                        <span class="original-price">
+                            ₹<%= item.product.originalPrice %>
+                        </span>
+
+                        <span class="discount">
+                            <%= item.product.discount %>% OFF
+                        </span>
+
+                    </div>
+
+
+                    <form
+                        action="/cart/add/<%= item.product._id %>"
+                        method="POST"
+                    >
+
+                        <button type="submit">
+                            Add to Cart
+                        </button>
+
+                    </form>
+
+
+                    <form
+                        action="/wishlist/remove/<%= item._id %>"
+                        method="POST"
+                    >
+
+                        <button
+                            type="submit"
+                            class="remove-btn"
+                        >
+                            Remove
+                        </button>
+
+                    </form>
+
+
+                </div>
+
+            <% }) %>
+
+
+        </div>
+
+
+    <% } %>
+
+</section>
+
+
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionBlast</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include("partials/navbar") %>
+
+<section class="hero">
+
+    <img src="/images/hero.png" alt="FashionBlast Fashion Collection" class="hero-image">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <span class="hero-tag">NEW COLLECTION</span>
+
+        <h1>Discover Your Style</h1>
+
+        <p>
+            Trendy looks, top brands and unbeatable prices.
+            Fashion that fits your lifestyle.
+        </p>
+
+        <a href="/products" class="hero-btn">
+            Shop Now <span>→</span>
+        </a>
+
+    </div>
+
+</section>
+
+<section class="products">
+
+    <div class="featured-heading">
+
+        <section class="category-section">
+
+    <h2>Shop by Category</h2>
+
+    <p>Explore fashion for every style and occasion.</p>
+
+    <div class="category-grid">
+
+        <a href="/products?category=Men">
+            <div class="category-card">
+                <span>👕</span>
+                <h3>Men</h3>
+            </div>
+        </a>
+
+        <a href="/products?category=Women">
+            <div class="category-card">
+                <span>👗</span>
+                <h3>Women</h3>
+            </div>
+        </a>
+
+        <a href="/products?category=Shoes">
+            <div class="category-card">
+                <span>👟</span>
+                <h3>Shoes</h3>
+            </div>
+        </a>
+
+        <a href="/products?category=Jewellery">
+            <div class="category-card">
+                <span>💎</span>
+                <h3>Jewellery</h3>
+            </div>
+        </a>
+
+        <a href="/products?category=Watch">
+            <div class="category-card">
+                <span>⌚</span>
+                <h3>Watches</h3>
+            </div>
+        </a>
+
+        <a href="/products?category=Bag">
+            <div class="category-card">
+                <span>👜</span>
+                <h3>Bags</h3>
+            </div>
+        </a>
+
+        <a href="/products?category=Accessories">
+            <div class="category-card">
+                <span>🕶️</span>
+                <h3>Accessories</h3>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+    <h2>Featured Products</h2>
+
+    <p>
+        Explore our handpicked collection of popular fashion products.
+    </p>
+
+</div>
+
+    <div class="product-container">
+
+        <% products.forEach(product => { %>
+
+            <div class="product-card">
+
+    <a href="/product/<%= product._id %>"
+       style="text-decoration:none; color:black;">
+
+        <img
+            src="<%= product.image %>"
+            alt="<%= product.name %>"
+        >
+
+        <p class="product-brand">
+            <%= product.brand %>
+        </p>
+
+        <h3>
+            <%= product.name %>
+        </h3>
+
+    </a>
+
+    <div class="rating">
+        ⭐ <%= product.rating %>
+        <span>(<%= product.reviews %>)</span>
+    </div>
+
+    <div class="price">
+
+        <span class="current-price">
+            ₹<%= product.price %>
+        </span>
+
+        <span class="original-price">
+            ₹<%= product.originalPrice %>
+        </span>
+
+        <span class="discount">
+            <%= product.discount %>% OFF
+        </span>
+
+    </div>
+
+    <form action="/cart/add/<%= product._id %>" method="POST">
+
+        <button type="submit">
+            Add to Cart
+        </button>
+
+    </form>
+
+</div>
+
+        <% }) %>
+
+    </div>
+
+</section>
+<%- include("footer") %>
+</body>
+</html>

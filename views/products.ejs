@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - FashionBlast</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include("partials/navbar") %>
+
+<h1 class="page-title">All Products</h1>
+
+<section class="products">
+
+    <div class="product-controls">
+
+    <form action="/products" method="GET" class="search-form">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search products..."
+            value="<%= search || '' %>"
+        >
+
+        <button type="submit">
+            🔍 Search
+        </button>
+
+    </form>
+
+</div>
+
+    <div class="categories">
+
+    <a href="/products?category=All">
+        <button type="button">All</button>
+    </a>
+
+    <a href="/products?category=Men">
+        <button type="button">Men</button>
+    </a>
+
+    <a href="/products?category=Women">
+        <button type="button">Women</button>
+    </a>
+
+    <a href="/products?category=Shoes">
+        <button type="button">Shoes</button>
+    </a>
+
+    <a href="/products?category=Jewellery">
+        <button type="button">Jewellery</button>
+    </a>
+
+    <a href="/products?category=Watch">
+        <button type="button">Watches</button>
+    </a>
+
+    <a href="/products?category=Bag">
+        <button type="button">Bags</button>
+    </a>
+
+    <a href="/products?category=Accessories">
+        <button type="button">Accessories</button>
+    </a>
+
+</div>
+
+    <div class="product-container">
+
+        <% products.forEach(product => { %>
+
+        <div class="product-card">
+
+            <a href="/product/<%= product._id %>" style="text-decoration:none; color:black;">
+
+                <img src="<%= product.image %>" alt="<%= product.name %>">
+
+                <p class="product-brand">
+                    <%= product.brand %>
+                </p>
+
+                <h3>
+                    <%= product.name %>
+                </h3>
+
+            </a>
+
+        <div class="rating">
+            ⭐ <%= product.rating %>
+            <span>(<%= product.reviews %>)</span>
+        </div>
+
+        <div class="price">
+
+            <span class="current-price">
+                ₹<%= product.price %>
+            </span>
+
+            <span class="original-price">
+                ₹<%= product.originalPrice %>
+            </span>
+
+            <span class="discount">
+                <%= product.discount %>% OFF
+            </span>
+
+        </div>
+
+        <form action="/cart/add/<%= product._id %>" method="POST">
+
+            <button type="submit">
+                Add to Cart
+            </button>
+
+        </form>
+        <form action="/wishlist/add/<%= product._id %>" method="POST">
+
+            <button type="submit" class="wishlist-btn">
+                ❤️
+            </button>
+
+        </form>
+
+    </div>
+
+        <% }) %>
+
+    </div>
+
+</section>
+<%- include("footer") %>
+</body>
+</html>

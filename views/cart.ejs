@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include("partials/navbar") %>
+
+<section class="cart">
+
+    <h1>Shopping Cart</h1>
+
+    <% if(cartItems.length === 0){ %>
+
+        <h2>Your cart is empty.</h2>
+
+    <% } else { %>
+
+        <% let total = 0; %>
+
+        <% cartItems.forEach(item => { %>
+
+            <% total += item.product.price * item.quantity; %>
+
+            <div class="cart-item">
+
+                <img src="<%= item.product.image %>" alt="<%= item.product.name %>">
+
+                <div>
+
+                    <h2><%= item.product.name %></h2>
+
+                    <h3>₹<%= item.product.price %></h3>
+
+                    <div class="quantity-box">
+
+                        <form action="/cart/decrease/<%= item._id %>" method="POST">
+                            <button type="submit">-</button>
+                        </form>
+
+                        <span><%= item.quantity %></span>
+
+                        <form action="/cart/increase/<%= item._id %>" method="POST">
+                            <button type="submit">+</button>
+                        </form>
+
+                    </div>
+
+                    <p>Subtotal: ₹<%= item.product.price * item.quantity %></p>
+
+                    <form action="/cart/remove/<%= item._id %>" method="POST">
+                        <button type="submit" class="remove-btn">Remove</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+        <h2 class="cart-total">Total: ₹<%= total %></h2>
+
+        <a href="/checkout" class="checkout-btn cart-checkout-btn">
+            Proceed to Checkout
+        </a>
+    <% } %>
+
+</section>
+
+</body>
+</html>

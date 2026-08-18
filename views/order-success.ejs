@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Successful - FashionBlast</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>FashionBlast</h2>
+
+    <ul>
+
+        <li><a href="/">Home</a></li>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/cart">Cart</a></li>
+
+        <% if(user){ %>
+
+            <li>
+                <a href="#">Welcome, <%= user.name %></a>
+            </li>
+
+            <li>
+                <a href="/logout">Logout</a>
+            </li>
+
+        <% } %>
+
+    </ul>
+
+</nav>
+
+
+<section class="order-success">
+
+    <div class="success-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h1>Order Placed Successfully!</h1>
+
+        <p>
+            Thank you for shopping with FashionBlast.
+        </p>
+
+        <div class="order-info">
+
+            <p>
+                <strong>Product:</strong>
+                <%= product.name %>
+            </p>
+
+            <p>
+                <strong>Quantity:</strong>
+                <%= order.quantity %>
+            </p>
+
+            <p>
+                <strong>Total:</strong>
+                ₹<%= order.totalPrice %>
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                <%= order.status %>
+            </p>
+
+        </div>
+
+        <a href="/products">
+            <button>
+                Continue Shopping
+            </button>
+        </a>
+
+    </div>
+
+</section>
+
+
+</body>
+
+</html>
